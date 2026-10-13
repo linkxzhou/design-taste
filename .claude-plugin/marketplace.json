@@ -1,0 +1,34 @@
+{
+  "name": "design-taste",
+  "description": "Design-taste skill: UI create/audit/redesign, website and image review, game art review (English and Chinese editions).",
+  "owner": {
+    "name": "linkxzhou",
+    "url": "https://github.com/linkxzhou"
+  },
+  "plugins": [
+    {
+      "name": "design-taste",
+      "source": "./en/design-taste",
+      "description": "Design taste for UI, websites, images and game art. English edition.",
+      "version": "1.0.0",
+      "author": { "name": "linkxzhou" },
+      "homepage": "https://github.com/linkxzhou/design-taste",
+      "repository": "https://github.com/linkxzhou/design-taste",
+      "license": "MIT",
+      "keywords": ["design", "ui", "ux", "design-tokens", "website-review", "image-review", "game-art", "skill"],
+      "category": "design"
+    },
+    {
+      "name": "design-taste-zh",
+      "source": "./zh/design-taste",
+      "description": "设计审美技能（中文版）：UI 创建/审查/重设计、网站与图片评审、游戏美术评审。",
+      "version": "1.0.0",
+      "author": { "name": "linkxzhou" },
+      "homepage": "https://github.com/linkxzhou/design-taste/blob/main/README.zh-CN.md",
+      "repository": "https://github.com/linkxzhou/design-taste",
+      "license": "MIT",
+      "keywords": ["design", "ui", "chinese", "website-review", "image-review", "game-art", "skill"],
+      "category": "design"
+    }
+  ]
+}

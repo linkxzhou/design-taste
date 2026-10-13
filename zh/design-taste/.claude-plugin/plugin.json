@@ -1,0 +1,20 @@
+{
+  "name": "design-taste-zh",
+  "description": "设计审美技能（中文版）：UI 创建/审查/重设计、网站与图片评审、游戏美术评审。",
+  "version": "1.0.0",
+  "author": {
+    "name": "linkxzhou",
+    "url": "https://github.com/linkxzhou"
+  },
+  "homepage": "https://github.com/linkxzhou/design-taste",
+  "repository": "https://github.com/linkxzhou/design-taste",
+  "license": "MIT",
+  "keywords": [
+    "design",
+    "ui",
+    "website-review",
+    "image-review",
+    "game-art",
+    "skill"
+  ]
+}

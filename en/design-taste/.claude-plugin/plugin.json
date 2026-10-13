@@ -1,0 +1,20 @@
+{
+  "name": "design-taste",
+  "description": "Design taste for UI, websites, images and game art. English edition.",
+  "version": "1.0.0",
+  "author": {
+    "name": "linkxzhou",
+    "url": "https://github.com/linkxzhou"
+  },
+  "homepage": "https://github.com/linkxzhou/design-taste",
+  "repository": "https://github.com/linkxzhou/design-taste",
+  "license": "MIT",
+  "keywords": [
+    "design",
+    "ui",
+    "website-review",
+    "image-review",
+    "game-art",
+    "skill"
+  ]
+}
