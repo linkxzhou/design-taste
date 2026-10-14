@@ -13,6 +13,14 @@ Ships in two standalone editions with identical logic:
 
 Install **one** edition per agent. Both use the skill name `design-taste`.
 
+## Download
+
+| Registry | English edition | 简体中文 edition |
+|---|---|---|
+| ClawHub | [clawhub.ai/linkxzhou/design-taste](https://clawhub.ai/linkxzhou/design-taste) | [clawhub.ai/linkxzhou/design-taste-zh](https://clawhub.ai/linkxzhou/design-taste-zh) |
+| SkillHub | — | [skillhub.cn/skills/user_16e7431e/design-taste-zh](https://skillhub.cn/skills/user_16e7431e/design-taste-zh) |
+| GitHub | [`en/design-taste/`](en/design-taste/) | [`zh/design-taste/`](zh/design-taste/) |
+
 ## What it does
 
 | Mode | Use it for |

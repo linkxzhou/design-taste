@@ -13,6 +13,14 @@
 
 每个 Agent 只安装**一个**版本。两个版本的技能名都是 `design-taste`。
 
+## 下载
+
+| 平台 | English 版 | 简体中文版 |
+|---|---|---|
+| ClawHub | [clawhub.ai/linkxzhou/design-taste](https://clawhub.ai/linkxzhou/design-taste) | [clawhub.ai/linkxzhou/design-taste-zh](https://clawhub.ai/linkxzhou/design-taste-zh) |
+| SkillHub | — | [skillhub.cn/skills/user_16e7431e/design-taste-zh](https://skillhub.cn/skills/user_16e7431e/design-taste-zh) |
+| GitHub | [`en/design-taste/`](en/design-taste/) | [`zh/design-taste/`](zh/design-taste/) |
+
 ## 功能
 
 | 模式 | 用途 |
