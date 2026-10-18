@@ -2,106 +2,64 @@
 name: design-taste
 description: Design-taste guide for making visual output look intentional, not templated "AI slop". Use to design, build, restyle, redesign, polish, critique or audit a UI (web page, landing page, dashboard, app screen, component), set up design tokens, pick colors/fonts/spacing, theme slides/docs, make a minimalist look, review/benchmark a live website URL, review or restyle images (photo, product, poster, banner, illustration, scientific figure, AI image — composition, palette, AI-artifact critique), review game art (screenshot, key art, Steam capsule, icon, HUD, concept, sprite/pixel; genre readability), or create a poster/cover. Chinese triggers include 设计界面, 美化页面, 界面评审, UI 审查, 重新设计, 改版, 设计规范, 配色, 字体搭配, 极简风格, 主题, 海报, 网站评审, 官网改版, 对标, 图片审美, 图片评审, 海报评审, 配色提取, 构图, 科研配图, AI 图片评价, 游戏美术, 游戏审美, 游戏 UI, RPG, MOBA, 二次元, 像素, 游戏截图评审. Not for backend logic or code cleanup with no visible change.
 license: MIT
+metadata:
+  version: "1.1.0"
 ---
+
+> This file is longer than one read (~4,000 characters). Keep reading in chunks to the end (review path, Constraints, build path, report, reference map) before you start.
 
 # Design Taste
 
-Make deliberate visual decisions, then execute them consistently. Taste here means: **one clear direction, few well-chosen tokens, strong hierarchy, and no default-looking filler.**
-
-Work through the steps below in order. Every mode runs Steps 0–2, then either the **build path (B3–B6)** or the **review path (R3–R6)**, then the **final report step**. Step labels are for your own tracking; don't paste them into the user's deliverable.
+Taste here means **one clear direction, few well-chosen tokens, strong hierarchy, and no default-looking filler**. Every mode runs Steps 0–2, then the **review path (R3–R6)** or the **build path (B3–B7)**, then the **final report**. Step labels are for your tracking; don't paste them into the deliverable.
 
 ## Step 0 — Intake and mode
+- **Do:** read the request and artifacts (code, URL, image). Pick one primary mode (+ overlay) below; the full table with mode-specific steps is `references/modes.md`.
+- **Output:** mode, overlay, path, reference files to load.
+- **Decision:** critique/score/benchmark only → review path; create or change something visible → build path; Redesign = review path as audit, then build path. No visible output (backend, cleanup) → this skill doesn't apply.
 
-- **Do:** read the request and any artifacts (code, URL, image, screenshot). Pick one primary mode from the table, plus any style overlay.
-- **Output:** primary mode, overlays, path (build or review), and the reference files to load.
-- **Decision:** create/change something visible → build path; critique, score or benchmark only → review path. Redesign runs the review path's R3–R6 as its audit, then the build path. Overlays (Minimalist) never change the path; they are applied in Step 2 and checked in B5. If the request has no visible output (backend logic, cleanup only), stop: this skill doesn't apply.
-
-| User intent | Mode | Path | Load | Mode-specific steps |
-|---|---|---|---|---|
-| Build a new page/app/component | **Create** | Build | `references/direction.md`, `references/principles.md`, `references/tokens.md` | B3–B6 as written |
-| "Review / audit / what's wrong with this UI" | **Audit** | Review | `references/audit.md` | `audit.md` §1 checks → §2 checklist → §3 report |
-| "Redesign / upgrade / polish / make it premium" | **Redesign** | Review → Build | `references/audit.md` then `references/redesign.md` | `redesign.md` Workflow 1–9 (R3–R6 = its step 2; B3–B6 = its steps 4–9) |
-| "Minimal / clean / editorial / Notion-like" | **Minimalist** (style overlay) | Same as primary mode | `references/minimalist.md` | Apply the spec in Step 2 (tone) and B3 (tokens); check it in B5 |
-| Slides, docs, reports, HTML handouts needing a look | **Theme** | Build | `references/theming.md` | Theme recipe in `theming.md` drives B3–B4 |
-| Poster, cover, static art (PNG/PDF) | **Artifact** | Build | `references/artifacts.md` | Philosophy → canvas process in `artifacts.md` drives B4 |
-| "Review / score / beautify this website URL", benchmark vs. competitors (评审网站, 网站美化, 对标) | **Site Review** | Review | `references/site-review.md`, `references/benchmarks.md`, run `scripts/review_site.py` | `site-review.md` §1 capture → §2 score → §3 compare → §4 report (§5 batch) |
-| "Rate / critique / what's wrong with this image", poster or cover review, AI-image critique (图片审美, 图片评审, 海报评审, AI 图片评价, 构图) | **Image Review** | Review | `references/image-aesthetics.md`, run `scripts/review_image.py <img> --type …` | R3 script metrics (§6) → R4 8 dimensions × type weights (§1–2) + AI checklist (§4) → R6 severity (§3) → report (§7) |
-| Game screenshot / key art / Steam capsule / icon / HUD / concept / sprite review, genre art direction (游戏美术, 游戏审美, 游戏 UI, 游戏截图评审, RPG, MOBA, 二次元, 像素) | **Game Art Review** | Review | `references/game-aesthetics.md`, `references/game-workflows.md`, run `scripts/review_image.py <img> --type game-screenshot\|key-art\|capsule\|icon\|game-ui\|concept\|sprite --genre <g>` | `game-workflows.md` §1 (step by step) → §2 report; fixes in §3 |
-| "Make this photo a magazine page / product hero / poster", extract a palette, image-model prompts, scientific figures (配色提取, 科研配图) | **Image Restyle** | Build | `references/image-workflows.md` (+ `image-aesthetics.md` to score before/after) | `image-workflows.md` §1 4-step pipeline = B3–B4; §3 restyle loop = B6 |
-
-Modes combine (e.g. Redesign + Minimalist). Read only the files you need.
+| Mode | Path | Load |
+|---|---|---|
+| Audit (UI/code review) | Review | `audit.md` |
+| Site Review (URL, 对标) | Review | `site-review.md`, `benchmarks.md`, run `scripts/review_site.py` |
+| Image Review (photo/poster/AI image) | Review | `image-aesthetics.md`, run `scripts/review_image.py <img> --type photo\|product\|poster\|social\|ui\|illustration\|figure\|ai` |
+| Game Art Review | Review | `game-aesthetics.md`, `game-workflows.md`, run `review_image.py --type game-screenshot\|key-art\|capsule\|icon\|game-ui\|concept\|sprite --genre <g>` |
+| Redesign | Review → Build | `audit.md`, then `redesign.md` |
+| Create (page/app/component) | Build | `direction.md`, `principles.md`, `tokens.md` |
+| Theme (slides/docs) | Build | `theming.md` |
+| Artifact (poster/cover PNG/PDF) | Build | `artifacts.md` |
+| Image Restyle / palette / figures | Build | `image-workflows.md` |
+| Minimalist (overlay) | Same | `minimalist.md` |
 
 ## Step 1 — Gather context
-
-- **Do:** find the stack, CSS approach, component library, existing tokens or design system, brand assets, and constraints (accessibility level, performance budget). Take a screenshot or run the mode's script to get baseline numbers: `scripts/review_site.py` for URLs, `scripts/review_image.py --type … [--genre …]` for images; add `--lang zh` when the user writes in Chinese.
-- **Output:** a short context note plus baseline metrics (or "no tooling — visual judgment only").
-- **Done when:** you know what exists and what you must preserve. If a required artifact is missing (no URL, no image, no code), ask for it before continuing.
+- **Do:** find stack, CSS approach, existing tokens/design system, brand, constraints. Get baseline numbers: `review_site.py` for URLs, `review_image.py --type … [--genre …]` for images (`--lang zh` for Chinese users). If OCR (`tesseract`) is available, read the text in images with it.
+- **Output:** short context note + baseline metrics (or "no tooling — visual judgment only").
+- **Done when:** you know what exists and must be preserved. Missing artifact → ask for it.
 
 ## Step 2 — Decide a direction
+- **Do:** write 3–5 lines before building or scoring: purpose & audience; **one tone** ("clean and modern" is not a tone); **one signature**; constraints; density. Review path: the direction *as perceived* is the yardstick.
+- **Output:** the direction block (`direction.md` §5); for build tasks show it to the user before the first file write.
+- **Done when:** it names one tone and one signature; an existing design system means "follow it well".
 
-- **Do:** write 3–5 lines (to yourself or the user) before building or scoring:
-  1. **Purpose & audience** — what job does this screen do, for whom?
-  2. **Tone** — choose one specific stance (e.g. editorial, brutalist, soft/organic, technical/dense, luxury/quiet, playful, retro-industrial). "Clean and modern" is not a direction. Apply overlays here.
-  3. **Signature** — the one thing someone will remember (a type pairing, a bold color field, an unusual grid, a motion moment).
-  4. **Constraints** — existing brand, framework, accessibility level, performance budget.
-  5. **Density** — airy marketing vs. dense tool. Dashboards ≠ landing pages.
-- **Review path:** write the direction *as perceived* (what the artifact seems to be going for) — that is the yardstick for scoring.
-- **Output:** the direction block (template in `references/direction.md` §5).
-- **Done when:** it names one tone and one signature. If the project already has a design system, the direction is *"follow it well"*; don't invent a second one.
-
-## Build path (Create, Redesign, Theme, Artifact, Image Restyle)
-
-### B3 — Tokens first
-- **Do:** define a small named scale for color, type, spacing, radius, shadow, and motion as CSS variables / theme config (3-tier system in `references/tokens.md`). Redesign: consolidate existing literals into it. Minimalist: use `minimalist.md` values.
-- **Output:** a token file or theme block.
-- **Done when:** the counts fit the Constraints section (≈1 accent, 1–2 typefaces, ≤ 6–8 sizes, one radius family, ≤ 3 shadows).
-
-### B4 — Execute
-- **Do:** implement real, working code (or the artifact) in the user's stack, matching existing conventions. Build global layer → components (all states) → layouts, using only tokens. Match effort to direction: maximal designs need elaborate execution; minimal designs need precision in spacing and type. Follow the mode's steps from the table (`redesign.md` 5–8, theme recipe, artifact process, image pipeline).
-- **Output:** changed files / rendered artifact.
-- **Done when:** the whole requested scope is built; no literal colors or sizes outside tokens.
-
-### B5 — Self-check against Constraints
-- **Do:** walk the Constraints section below line by line (core rules + AI-slop tells), plus any overlay spec.
-- **Output:** list of violations.
-- **Decision:** any violation → fix it in B4 and re-check; none → B6.
-
-### B6 — Verify
-- **Do:** run the quick checks from `references/audit.md` (counts of hex colors, font sizes, radii; contrast; states; responsive at ~375/768/1280px). If you can render, take a screenshot and look at it. Run existing tests/build. For Redesign or Image Restyle, re-run the Step 1 script and compare before/after numbers.
-- **Output:** check results with numbers.
-- **Decision:** counts within limits, no contrast failures, no P0 issues, and nothing reads as generic or cluttered → final report. Otherwise → back to B4.
-
-## Review path (Audit, Site Review, Image Review, Game Art Review; audit half of Redesign)
+## Review path (Audit, Site Review, Image Review, Game Art Review; first half of Redesign)
 
 ### R3 — Measure
-- **Do:** run the mode's measurable checks: `audit.md` §1 grep counts, `review_site.py` metrics, or `review_image.py` metrics (+ grayscale/thumbnail tests for games).
-- **Output:** a metrics table.
-- **Done when:** every metric the mode's report template asks for has a number, or is marked "not measurable" with the reason.
+- **Do:** run the mode's measurable checks: `audit.md` §1 grep counts (distinct hex colors, font sizes, radii, shadows), `review_site.py`, or `review_image.py` (+ grayscale/thumbnail for games). Never modify the artifact under review.
+- **Output:** metrics table with real counts.
+- **Done when:** every metric the report template needs has a number or "not measurable: why".
 
 ### R4 — Score
-- **Do:** look at the artifact yourself and score it with the mode's rubric: `audit.md` §2 checklist, `site-review.md` §2 (45/55), `image-aesthetics.md` 8 dimensions × type weights + AI checklist, or `game-aesthetics.md` G1–G11 × asset weights + genre profile. Combine metric and visual scores as the reference says (e.g. 0.4 metric + 0.6 visual for images).
-- **Output:** per-dimension scores, each with concrete evidence ("six fingers on the lower-left hand", not adjectives).
-- **Done when:** every dimension has a score and evidence; any P0 caps the total as the rubric specifies.
+- **Do:** score with the mode's rubric (`audit.md` §2, `site-review.md` §2, `image-aesthetics.md` 8 dims + AI checklist, `game-aesthetics.md` G1–G11); combine metric and visual scores as the reference says.
+- **Output:** per-dimension scores with concrete evidence.
+- **Done when:** every dimension has score + evidence; any P0 caps the total per the rubric.
 
-### R5 — Compare (Site Review and Game Art Review; others skip)
-- **Do:** compare against `benchmarks.md` / `benchmarks.csv` or the genre profile and named competitors.
-- **Output:** metrics vs. benchmark table and 2–3 takeaways.
-- **Done when:** each gap names the benchmark value it misses.
+### R5 — Compare (Site Review and Game Art Review only)
+- **Do:** compare with `benchmarks.md`/`benchmarks.csv` or the genre profile. **Output:** gap table + 2–3 takeaways. **Done when:** each gap names the benchmark value.
 
 ### R6 — Prioritize
-- **Do:** turn findings into P0/P1/P2 issues. Each issue gets: what, where (file:line, screen area, or image region), why it matters, and a concrete fix (token values, HEX, crop ratio, prompt).
-- **Output:** prioritized issue list.
-- **Done when:** every item has where/why/fix. Redesign → continue to B3; other review modes → final report.
+- **Do:** P0/P1/P2 issues, each with what, where (file:line / region), why, concrete fix (token values, HEX, crop, prompt).
+- **Output:** prioritized list. **Done when:** every item has where/why/fix. Redesign → B3; else → final report.
 
-## Final step — Report
-
-- **Do:** write in the user's language. The scripts write `report.md` in English by default; pass `--lang zh` for a Chinese skeleton and replace every TODO.
-  - Build path: the direction you chose and trade-offs in 2–4 lines, what changed, and verification numbers from B6.
-  - Review path: the mode's report template (`audit.md` §3, `site-review.md` §4, `image-aesthetics.md` §7, `game-workflows.md` §2).
-- **Output:** the deliverable message (plus report files/screenshots if produced).
-- **Done when:** every claim is backed by a number or an observation from R3/R4 or B6; nothing unverified is presented as checked.
-
-## Constraints (checked in B5)
+## Constraints (checked in B6 and in reviews)
 
 ### Core rules (always on)
 - **Commit.** A bold minimal design and a maximal one are both fine; a timid average of everything is not.
@@ -125,7 +83,38 @@ Modes combine (e.g. Redesign + Minimalist). Read only the files you need.
 
 Details and alternatives: `references/principles.md`.
 
+## Build path (Create, Redesign, Theme, Artifact, Image Restyle)
+
+### B3 — Budget and plan
+- **Do:** plan so a **complete, valid first version exists by about 40% of your step/time budget** (roughly 15 tool calls or 8 minutes for a page or poster). Write the main file in 1–3 writes, not dozens of appends. Polish only after the complete version renders.
+- **Output:** a section list (page), or for a poster the **exact copy written out with a word count** (≤ 25 words total, small print included; don't invent extra details such as prices, addresses, lineups or series numbers the user didn't give) plus 2–4 colors + neutrals. Fonts for either: at most 2 families in total — a monospace or label face counts as one.
+- **Done when:** the plan fits the budget and the poster copy count is ≤ 25; anything that doesn't fit is cut now, not later.
+
+### B4 — Tokens first
+- **Do:** a small named scale for color, type, spacing, radius, shadow, motion as CSS variables / theme config (`tokens.md`); Minimalist: `minimalist.md` values.
+- **Output:** token block. **Done when:** ≈1 accent, 1–2 typefaces, ≤ 6–8 sizes, one radius family, ≤ 3 shadows.
+
+### B5 — Execute the complete version
+- **Do:** build global layer → every planned section/element → states, using only tokens, in the user's stack; include `prefers-reduced-motion` and the closing tags in the first pass. Artifacts: render the PNG/PDF now.
+- **Output:** the complete file(s) / rendered artifact.
+- **Done when:** the whole scope exists and renders (HTML ends with `</html>`, the PDF opens). Then B6 — no polishing before this.
+
+### B6 — Hard checks
+- **Do:** walk the Constraints line by line, then measure: hex/font-size/radius counts; distinct font families (≤ 2, monospace included); contrast; screenshot at ~375/1280px. **Posters/artifacts:** list every text string on the canvas and count its words (letter-spaced or outlined text still counts; `pdftotext` misses outlined text, so count from your source file) — must be ≤ 25 unless the brief supplies more copy; over → delete lines, don't shrink them; count dominant colors in the render (≥ 2% of pixels, after quantizing) — must be ≤ 4 plus neutrals; fonts embedded or outlined; nothing clipped. Run existing tests/build; Redesign and Image Restyle re-run the Step 1 script and compare before/after numbers.
+- **Output:** check results with numbers.
+- **Decision:** any failure → fix in B5 and re-check; all pass → B7.
+
+### B7 — Polish (only with budget left)
+- **Do:** refine spacing, type, details; re-run B6 after changes. **Output:** improved files. **Done when:** budget is spent or nothing reads generic; never leave the file worse than the last passing version.
+
+## Final step — Report
+- **Do:** write in the user's language (`--lang zh` gives a Chinese report skeleton; replace every TODO). Build: the direction and trade-offs in 2–4 lines, what was made (file paths), B6 numbers. Review: the mode's template (`audit.md` §3, `site-review.md` §4, `image-aesthetics.md` §7, `game-workflows.md` §2), leading with a direct answer to the user's question.
+- **Output:** the deliverable message (plus report files/screenshots).
+- **Done when:** every claim is backed by a number or observation from R3/R4 or B6; nothing unverified is presented as checked.
+
 ## Reference map
+
+- `references/modes.md` — full mode table with mode-specific steps per reference file.
 
 - `references/direction.md` — direction prompts, tone catalog, how to pick fonts/palettes per tone.
 - `references/principles.md` — color, typography, spacing, radius, shadow, motion, layout rules + anti-patterns.
