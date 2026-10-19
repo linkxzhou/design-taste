@@ -72,6 +72,22 @@ python3 scripts/review_image.py --list-genres
 python3 scripts/review_image.py photo.jpg --lang zh   # Chinese report skeleton
 ```
 
+## Evaluation
+
+Agent model `glm-5.3-flash-external` via miniagent, 2026-10-19, skill v1.1.0 (EN). 5 cases: landing page, React UI audit, poster PDF, AI poster review and Steam capsule review. Graded by script checks plus manual review. One run per case.
+
+| | With skill | Baseline (no skill) |
+|---|---|---|
+| Assertions | **26 / 28** (3/5 cases all-pass) | 16 / 28 (0/5) |
+
+- **Landing page:** the baseline produced the generic hero + 3 features + 3 pricing cards with emoji. With the skill, the run timed out at 1200s before delivering its write-up (5/6). A retry at 1800s finished in 927s and scored 6/6.
+- **Reviews:** 6/6 vs 4/6 on the AI poster review, and 4/5 vs 2/5 on the Steam capsule review. With the skill, it missed the "-50%" badge rule. The baseline skipped the image check.
+- **Triggering** (24 mixed queries, 4 skills installed): 6/6 recall, 0 false triggers.
+- **Caveats:**
+  - On the React audit, the agent never actually read SKILL.md, yet still scored 5/5.
+  - Runs with the skill are slower: 4,592s vs 2,562s total.
+  - Each case ran once.
+
 ## Install
 
 Clone once, then copy (or symlink) **one** edition into your agent's skills folder. Replace `en` with `zh` for the Chinese edition.
